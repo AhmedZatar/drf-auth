@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3'
 
 services:
   db:
@@ -10,10 +10,10 @@ services:
 
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn storyapi_porject.wsgi:application --bind 0.0.0.0:8002 --workers 4
     volumes:
       - .:/code
     ports:
-      - "8000:8000"
+      - "8002:8002"
     depends_on: 
       - db
